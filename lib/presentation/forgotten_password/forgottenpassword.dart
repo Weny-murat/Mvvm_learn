@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class ForgottenPassword extends StatefulWidget {
-  ForgottenPassword({Key? key}) : super(key: key);
+class ForgottenPasswordView extends StatefulWidget {
+  ForgottenPasswordView({Key? key}) : super(key: key);
 
   @override
-  State<ForgottenPassword> createState() => _ForgottenPasswordState();
+  State<ForgottenPasswordView> createState() => _ForgottenPasswordViewState();
 }
 
-class _ForgottenPasswordState extends State<ForgottenPassword> {
+class _ForgottenPasswordViewState extends State<ForgottenPasswordView> {
   @override
   Widget build(BuildContext context) {
     return Container();
