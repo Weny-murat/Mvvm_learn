@@ -1,3 +1,4 @@
+// ignore_for_file: prefer_final_fields
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -14,34 +15,34 @@ class OnBoardingView extends StatefulWidget {
 }
 
 class _OnBoardingViewState extends State<OnBoardingView> {
-  late final List<SliderObject> _list = _getSliderData();
+  late final List<SliderObject> _list = _sliderData;
   PageController _pageController = PageController(initialPage: 0);
 
   int _currentindex = 0;
 
-  List<SliderObject> _getSliderData() => [
-        SliderObject(AppStrings.onBoardingTitle1,
-            AppStrings.onBoardingSubtitle1, ImageAssets.onboardingLogo1),
-        SliderObject(AppStrings.onBoardingTitle2,
-            AppStrings.onBoardingSubtitle2, ImageAssets.onboardingLogo2),
-        SliderObject(AppStrings.onBoardingTitle3,
-            AppStrings.onBoardingSubtitle4, ImageAssets.onboardingLogo3),
-        SliderObject(AppStrings.onBoardingTitle4,
-            AppStrings.onBoardingSubtitle4, ImageAssets.onboardingLogo4),
-      ];
+  List<SliderObject> _sliderData = [
+    SliderObject(AppStrings.onBoardingTitle1, AppStrings.onBoardingSubtitle1,
+        ImageAssets.onboardingLogo1),
+    SliderObject(AppStrings.onBoardingTitle2, AppStrings.onBoardingSubtitle2,
+        ImageAssets.onboardingLogo2),
+    SliderObject(AppStrings.onBoardingTitle3, AppStrings.onBoardingSubtitle4,
+        ImageAssets.onboardingLogo3),
+    SliderObject(AppStrings.onBoardingTitle4, AppStrings.onBoardingSubtitle4,
+        ImageAssets.onboardingLogo4),
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorManager.white,
-      appBar: AppBar(
-        backgroundColor: ColorManager.white,
-        elevation: AppSize.s1_5,
-        systemOverlayStyle: SystemUiOverlayStyle(
-            statusBarColor: ColorManager.white,
-            statusBarBrightness: Brightness.dark,
-            statusBarIconBrightness: Brightness.dark),
-      ),
+      // appBar: AppBar(
+      //   backgroundColor: ColorManager.white,
+      //   elevation: AppSize.s1_5,
+      //   systemOverlayStyle: SystemUiOverlayStyle(
+      //       statusBarColor: ColorManager.white,
+      //       statusBarBrightness: Brightness.dark,
+      //       statusBarIconBrightness: Brightness.dark),
+      // ),
       body: PageView.builder(
         controller: _pageController,
         itemCount: 4,
@@ -62,19 +63,73 @@ class _OnBoardingViewState extends State<OnBoardingView> {
             Align(
               child: TextButton(
                   onPressed: () {},
-                  child: Text(
+                  child: const Text(
                     AppStrings.skip,
                     textAlign: TextAlign.end,
                   )),
             ),
-            //burada kaldık.
+            _getBottomSheetWidget(),
           ],
         ),
       ),
     );
   }
+
+  Widget _getBottomSheetWidget() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(AppPadding.p14),
+          child: GestureDetector(
+            onTap: () {
+              // _pageController.animateToPage(_getPreviousIndex(),
+              //     duration: const Duration(milliseconds: DurationConstants.d300),
+              //     curve: Curves.bounceInOut);
+            },
+            child: SizedBox(
+              height: AppSize.s20,
+              width: AppSize.s20,
+              child: SvgPicture.asset(ImageAssets.leftArrowIc),
+            ),
+          ),
+        ),
+        Row(
+          children: [
+            for (int i = 0; i < _list.length; i++)
+              Padding(
+                padding: const EdgeInsets.all(AppPadding.p8),
+                child: _getProperCircle(i),
+              )
+          ],
+        ),
+        Padding(
+          padding: const EdgeInsets.all(AppPadding.p14),
+          child: GestureDetector(
+            onTap: () {
+              //go to next slide
+            },
+            child: SizedBox(
+              height: AppSize.s20,
+              width: AppSize.s20,
+              child: SvgPicture.asset(ImageAssets.rightArrowIc),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _getProperCircle(int index) {
+    if (index == _currentindex) {
+      return SvgPicture.asset(ImageAssets.hollowCirlceIc);
+    } else {
+      return SvgPicture.asset(ImageAssets.solidCircleIc);
+    }
+  }
 }
 
+// ignore: must_be_immutable
 class OnBoardingPage extends StatelessWidget {
   SliderObject _sliderObject;
   OnBoardingPage(this._sliderObject, {Key? key}) : super(key: key);
