@@ -1,6 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'responses.g.dart';
 
+//veri(data) kısmının ilk girişi
+//sunucumuzdan gelecek cevapları nasıl ele alacağımızı belirleyip bu iş için otomatik kod oluşturmayı sağlayacak.
 @JsonSerializable()
 class BaseResponse {
   @JsonKey(name: 'status')
@@ -54,3 +56,18 @@ class AuthenticationResponse extends BaseResponse {
 
   Map<String, dynamic> toJson() => _$AuthenticationResponseToJson(this);
 }
+
+// *@JsonSerializable() işaretlemesi sayesinde otomatik kod oluşturmasını sağlıyoruz.
+// *class AuthenticationResponse extends BaseResponse { sınıf ismi ve varsa extend ettiği diğer class eklemeleri
+//   *@JsonKey(name: 'customer') // Alan(Field)'ın nasıl serialize işlemine tutulacağını belirten işaretleme
+//   *CustomerResponse? customer; //Baştaki alanın tipi sonra alanın adı
+//   @JsonKey(name: 'contacts')
+//   ContactsResponse? contacts;
+
+//   AuthenticationResponse(this.contacts, this.customer);
+
+//   *factory AuthenticationResponse.fromJson(Map<String, dynamic> json) => kalıp kodlar bu kodların karşılıkları ve işleyişleri notasyonlar sayesinde generate edilecek.
+//       _$AuthenticationResponseFromJson(json);
+
+//   Map<String, dynamic> toJson() => _$AuthenticationResponseToJson(this);
+// }

@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:mvvm_learn/app/constants.dart';
-import 'package:mvvm_learn/data/responses/responses.dart';
+import '../../app/constants.dart';
+import '../responses/responses.dart';
 import 'package:retrofit/http.dart';
 part 'app_api.g.dart';
 
@@ -9,5 +9,10 @@ abstract class AppServiceClient {
   factory AppServiceClient(Dio dio, {String baseUrl}) = _AppServiceClient;
 
   @POST('/customers/login')
-  Future<AuthenticationResponse> login();
+  Future<AuthenticationResponse> login(
+    @Field("email") String email,
+    @Field("password") String password,
+    @Field("iemi") String iemi,
+    @Field("deviceType") String deviceType,
+  );
 }

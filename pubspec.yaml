@@ -39,6 +39,7 @@ dependencies:
   analyzer: ^4.2.0
   dio: ^4.0.6
   json_annotation: ^4.6.0
+  dartz: ^0.10.1
   
 
 dev_dependencies:
