@@ -99,7 +99,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
             padding: const EdgeInsets.all(AppPadding.p14),
             child: GestureDetector(
               onTap: () {
-                _pageController.animateToPage(_viewModel.goPrevious(),
+                _pageController.previousPage(
                     duration:
                         const Duration(milliseconds: DurationConstants.d300),
                     curve: Curves.bounceInOut);
@@ -124,7 +124,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
             padding: const EdgeInsets.all(AppPadding.p14),
             child: GestureDetector(
               onTap: () {
-                _pageController.animateToPage(_viewModel.goNext(),
+                _pageController.nextPage(
                     duration:
                         const Duration(milliseconds: DurationConstants.d300),
                     curve: Curves.bounceInOut);
